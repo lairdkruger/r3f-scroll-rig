@@ -3,12 +3,21 @@ import { useFrame, useThree } from 'react-three-fiber'
 import lerp from 'lerp'
 import state from '../store'
 
+// Nestable content block for a declarative scroll rig
+// Based on Paul Henschel's work:
+// https://tympanus.net/codrops/2019/12/16/scroll-refraction-and-shader-effects-in-three-js-and-react/
+
+// Offset: section index (eg: offset = 2 will be the third content section)
+// Factor: sets block's speed and direction when page is scrolled
+
 const offsetContext = createContext(0)
 
 function Block({ children, offset, factor, ...props }) {
+  // Fetch parent offset and the height of a single section
   const { offset: parentOffset, sectionHeight, aspect } = useBlock()
   const ref = useRef()
   offset = offset !== undefined ? offset : parentOffset
+  // Runs every frame and lerps the inner block into its place
   useFrame(() => {
     const curY = ref.current.position.y
     const curTop = state.top.current / aspect
