@@ -9,10 +9,13 @@ import { useBlock } from '../Blocks'
 // A 3D plane representing an HTML image element with CSS positioning
 // The image uses a custom material which allows for shader manipulation
 
-function ImagePlane({ color = 'white', src, ...props }) {
+function ImagePlane({ color = 'white', ...props }) {
   const material = useRef()
-  const texture = useLoader(THREE.TextureLoader, src) // BREAKS IF THIS IS REMOVED???
-  const image = document.getElementsByClassName('image-plane')[0]
+  const texture = useLoader(THREE.TextureLoader, props.src) // BREAKS IF THIS IS REMOVED???
+  var images = document.getElementsByClassName('image-plane')
+  images = Array.from(images) //convert to array
+
+  const image = images.filter((el) => el.dataset.id === props.image_id)[0]
 
   const imageTexture = useLoader(THREE.TextureLoader, image.src)
   const imageSize = new THREE.Vector2(0, 0)
@@ -27,7 +30,6 @@ function ImagePlane({ color = 'white', src, ...props }) {
   useFrame(() => {
     const { top } = state
     const scrollSpeed = top.current - last
-    console.log(scrollSpeed)
     material.current.scale = lerp(material.current.scale, Math.abs(scrollSpeed) / 150, 0.1)
     material.current.shift = lerp(material.current.shift, scrollSpeed / 150, 0.1)
     last = top.current

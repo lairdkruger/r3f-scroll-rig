@@ -51,7 +51,7 @@ function App() {
           <HtmlContent portal={domContent} className="section-box">
             <h2>first section</h2>
             <div className="image-box">
-              <img className="image-plane" src="/peppers.png" alt="peppers and spicy things" />
+              <img data-id="1" className="image-plane" src="media/images/peppers.png" alt="peppers and spicy things" />
             </div>
           </HtmlContent>
           <Suspense
@@ -60,7 +60,7 @@ function App() {
                 <h1>Loading Image</h1>
               </HtmlContent>
             }>
-            <ImagePlane color="#bfe2ca" src="/peppers.png" />
+            <ImagePlane color="#bfe2ca" src="media/images/peppers.png" image_id="1" />
           </Suspense>
         </Block>
 
