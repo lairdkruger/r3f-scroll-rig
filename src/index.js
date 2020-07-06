@@ -1,7 +1,6 @@
 import { render } from 'react-dom'
-import React, { useState, useEffect, useRef } from 'react'
-import { Canvas, useThree } from 'react-three-fiber'
-import { HTML } from 'drei'
+import React, { useState, useEffect, useRef, Suspense } from 'react'
+import { Canvas } from 'react-three-fiber'
 
 import { Block } from './components/Blocks'
 import HtmlContent from './components/HtmlContent'
@@ -10,26 +9,29 @@ import { Shapes } from './components/Shapes'
 import Box from './components/shapes/Box'
 import state from './store'
 import './styles.css'
+import FlatCamera from './components/camera/FlatCamera'
+import ImagePlane from './components/media/ImagePlane'
 
 function App() {
   const [events, setEvents] = useState()
   const domContent = useRef()
   const scrollArea = useRef()
+  // Scroll an area by updating state.top.current
   const onScroll = (e) => (state.top.current = e.target.scrollTop)
   useEffect(() => void onScroll({ target: scrollArea.current }), [])
+
   return (
     <>
       <Canvas
         colorManagement
-        gl={{ alpha: false, antialias: true }}
-        camera={{ position: [0, 0, 4.5], fov: 50, near: 0.1, far: 100 }}
+        gl={{ alpha: true, antialias: true }}
         onCreated={({ gl, events }) => {
           gl.setClearColor('white')
-          gl.toneMappingExposure = 2.5
-          gl.toneMappingWhitePoint = 1
-          // Export canvas events, we will put them onto the scroll area
+          // Export canvas events, we will put them onto the scroll area (hovers, clicks etc)
           setEvents(events)
         }}>
+        <FlatCamera />
+
         <Block factor={1.5} offset={0}>
           <Shapes />
           <HtmlContent portal={domContent}>
@@ -46,29 +48,42 @@ function App() {
         </Block>
 
         <Block factor={1.5} offset={1}>
-          <Box />
-          <HTML center portal={domContent}>
+          <HtmlContent portal={domContent} className="section-box">
             <h2>first section</h2>
-          </HTML>
+            <div className="image-box">
+              <img data-id="1" className="image-plane" src="media/images/peppers.png" alt="peppers and spicy things" />
+            </div>
+          </HtmlContent>
+          <Suspense
+            fallback={
+              <HtmlContent>
+                <h1>Loading Image</h1>
+              </HtmlContent>
+            }>
+            <ImagePlane color="#bfe2ca" src="media/images/peppers.png" image_id="1" />
+          </Suspense>
         </Block>
 
         <Block factor={1.5} offset={2}>
-          <Box />
-          <HTML center portal={domContent}>
+          <Box scale={[200, 200, 200]} />
+          <HtmlContent portal={domContent} className="section-box">
             <h2>second section</h2>
-          </HTML>
+          </HtmlContent>
         </Block>
 
         <Block factor={-2} offset={4}>
-          <Box scale={[2, 2, 2]} />
-          <HTML center portal={domContent}>
+          <Box scale={[400, 400, 400]} />
+          <HtmlContent portal={domContent} className="section-box">
             <h2>third section</h2>
-          </HTML>
+          </HtmlContent>
         </Block>
       </Canvas>
 
+      {/* container with events */}
       <div className="scrollArea" ref={scrollArea} onScroll={onScroll} {...events}>
+        {/* content container containing all html elements */}
         <div style={{ position: 'sticky', top: 0 }} ref={domContent} />
+        {/* sizer for the scroll area */}
         <div style={{ height: `${state.pages * 100}vh` }} />
       </div>
     </>

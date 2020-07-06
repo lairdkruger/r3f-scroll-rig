@@ -3,7 +3,7 @@ import useWobble from '../movement/useWobble'
 
 function Cross(props) {
   const inner = useRef()
-  const ref = useWobble(0.1, 'sin', () => (inner.current.rotation.z += 0.001))
+  const ref = useWobble(20, 'sin', () => (inner.current.rotation.z += 0.001))
   return (
     <group ref={ref}>
       <group ref={inner} {...props}>

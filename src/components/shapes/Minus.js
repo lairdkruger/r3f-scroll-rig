@@ -2,7 +2,7 @@ import React from 'react'
 import useWobble from '../movement/useWobble'
 
 function Minus(props) {
-  const ref = useWobble(0.1, 'sin')
+  const ref = useWobble(10, 'sin')
   return (
     <group ref={ref}>
       <group {...props}>
