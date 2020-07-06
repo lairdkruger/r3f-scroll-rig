@@ -4,7 +4,6 @@ import './materials/ImageMaterial'
 import { useLoader, useFrame } from 'react-three-fiber'
 import state from '../../store'
 import lerp from 'lerp'
-import { useBlock } from '../Blocks'
 
 // A 3D plane representing an HTML image element with CSS positioning
 // The image uses a custom material which allows for shader manipulation

@@ -81,3 +81,10 @@ body {
   object-fit: cover;
   opacity: 0;
 }
+
+.header-white {
+  max-width: 200px;
+  font-size: 75px;
+  line-height: 75px;
+  color: white;
+}
