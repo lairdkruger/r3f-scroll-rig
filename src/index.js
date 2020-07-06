@@ -48,7 +48,6 @@ function App() {
         </Block>
 
         <Block factor={1.5} offset={1}>
-          <Box scale={[200, 200, 200]} />
           <HtmlContent portal={domContent} className="section-box">
             <h2>first section</h2>
             <div className="image-box">
