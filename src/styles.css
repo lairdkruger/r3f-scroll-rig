@@ -50,6 +50,16 @@ body {
   }
 }
 
+.section-box {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 380px;
+}
+
 .scrollArea {
   position: absolute;
   top: 0;
@@ -57,4 +67,17 @@ body {
   width: 100vw;
   height: 100vh;
   overflow: auto;
+}
+
+.image-box {
+  width: 200px;
+  height: 200px;
+  position: absolute;
+}
+
+.image-plane {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
 }

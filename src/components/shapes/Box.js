@@ -4,7 +4,7 @@ import useWobble from '../movement/useWobble'
 
 function Box(props) {
   const [hovered, set] = useState(false)
-  const ref = useWobble(0.5, 'cos')
+  const ref = useWobble(50.0, 'cos')
   useFrame(() => (ref.current.rotation.x = ref.current.rotation.y = ref.current.rotation.z += 0.01))
   return (
     <mesh ref={ref} {...props} onPointerOver={() => set(true)} onPointerOut={() => set(false)}>

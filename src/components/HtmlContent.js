@@ -2,6 +2,9 @@ import React from 'react'
 import { useThree } from 'react-three-fiber'
 import { HTML } from 'drei'
 
+// drei component tying html elements to any object in a scene
+// portal: target container
+
 function HtmlContent({ className, style, children, portal }) {
   const { size } = useThree()
   return (

@@ -1,34 +1,29 @@
 import React, { useRef } from 'react'
-import { useBlock } from '../Blocks'
-import lerp from 'lerp'
+import * as THREE from 'three'
+import './materials/ImageMaterial'
+import { useLoader } from 'react-three-fiber'
 
-function ImagePlane({ color = 'white', map, ...props }) {
-  const { viewportHeight, offsetFactor } = useBlock()
+// A 3D plane representing an HTML image element with CSS positioning
+
+function ImagePlane({ color = 'white', src, ...props }) {
   const material = useRef()
-  let last = state.top.current
-  useFrame(() => {
-    const { pages, top } = state
-    material.current.scale = lerp(material.current.scale, offsetFactor - top.current / ((pages - 1) * viewportHeight), 0.1)
-    material.current.shift = lerp(material.current.shift, (top.current - last) / 150, 0.1)
-    last = top.current
-  })
-  return (
-    <mesh {...props}>
-      <planeBufferGeometry attach="geometry" args={[1, 1, 32, 32]} />
-      <customMaterial ref={material} attach="material" color={color} map={map} />
-    </mesh>
-  )
-}
+  const texture = useLoader(THREE.TextureLoader, src) // BREAKS IF THIS IS REMOVED???
+  const image = document.getElementsByClassName('image-plane')[0]
 
-function Content({ left, children, map }) {
-  const { contentMaxWidth, canvasWidth, margin } = useBlock()
-  const aspect = 1.75
-  const alignRight = (canvasWidth - contentMaxWidth - margin) / 2
+  const imageTexture = useLoader(THREE.TextureLoader, image.src)
+  const imageSize = new THREE.Vector2(0, 0)
+  const imageOffset = new THREE.Vector2(0, 0)
+
+  const { width, height, top, left } = image.getBoundingClientRect()
+
+  imageSize.set(width, height)
+  imageOffset.set(left - window.innerWidth / 2 + width / 2, 0.0)
+
   return (
-    <group position={[alignRight * (left ? -1 : 1), 0, 0]}>
-      <Plane scale={[contentMaxWidth, contentMaxWidth / aspect, 1]} color="#bfe2ca" map={map} />
-      {children}
-    </group>
+    <mesh position={[imageOffset.x, imageOffset.y, 0]} scale={[imageSize.x, imageSize.y, 1]}>
+      <planeBufferGeometry attach="geometry" args={[1, 1, 32, 32]} />
+      <customMaterial ref={material} attach="material" color={color} map={imageTexture} />
+    </mesh>
   )
 }
 

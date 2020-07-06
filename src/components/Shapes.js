@@ -12,16 +12,18 @@ export function Shapes() {
   const {
     viewport: { width, height }
   } = useThree()
-  const ringSize = Math.max(3, width / 2)
-  const crossSize = 0.7
+  const ringSize = width / 4
+  const crossSize = width / 4
+  const minusSize = width / 6
+  const boxSize = width / 8
   return (
     <>
-      <Ring position={[-width * 0.8, height * -3, -5]} scale={[ringSize, ringSize, 1]} />
+      <Ring position={[-width * 0.5, height * -3, -5]} scale={[ringSize, ringSize, 1]} />
       <Cross position={[-width / 2.5, height / 8, -1]} scale={[crossSize, crossSize, 1]} rotation={[0, 0, Math.PI / 4]} />
-      <Minus position={[width / 3, -height / 3.5, -2]} scale={[0.8, 0.8, 0.8]} rotation={[0, 0, Math.PI / 10]} />
+      <Minus position={[width / 3, -height / 3.5, -2]} scale={[minusSize, minusSize, 1]} rotation={[0, 0, Math.PI / 10]} />
       <group rotation={[Math.PI / 8, 0, 0]} position={[-width / 4, -height / 6, 0]}>
-        <Box scale={[0.8, 0.8, 0.8]} />
-        <Box position={[width / 1.5, height / 4, -3]} scale={[0.5, 0.5, 0.5]} />
+        <Box position={[width / 10, height / 2, 40]} scale={[boxSize, boxSize, boxSize]} />
+        <Box position={[width / 2, height / 2, 20]} scale={[boxSize / 1.5, boxSize / 1.5, boxSize / 1.5]} />
         <FlatLighting />
       </group>
     </>
