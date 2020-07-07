@@ -49,9 +49,8 @@ function App() {
 
         <Block factor={1.5} offset={1}>
           <HtmlContent portal={domContent} className="section-box">
-            <h2 className="header-white">first section</h2>
             <div className="image-box">
-              <img data-id="1" className="image-plane" src="media/images/melon.jpg" alt="melon" />
+              <img data-id="1" className="image-plane" src="media/images/ShaderPlane.png" alt="melon" />
             </div>
           </HtmlContent>
           <Suspense
@@ -60,21 +59,19 @@ function App() {
                 <h1>Loading Image</h1>
               </HtmlContent>
             }>
-            <ImagePlane color="#bfe2ca" src="media/images/melon.jpg" image_id="1" />
+            <ImagePlane color="#bfe2ca" src="media/images/ShaderPlane.png" image_id="1" />
           </Suspense>
         </Block>
 
         <Block factor={1.5} offset={2}>
-          <Box scale={[200, 200, 200]} />
           <HtmlContent portal={domContent} className="section-box">
-            <h2>second section</h2>
-          </HtmlContent>
-        </Block>
-
-        <Block factor={-2} offset={4}>
-          <Box scale={[400, 400, 400]} />
-          <HtmlContent portal={domContent} className="section-box">
-            <h2>third section</h2>
+            <h1>
+              r3f
+              <br />
+              scroll
+              <br />
+              rig.
+            </h1>
           </HtmlContent>
         </Block>
       </Canvas>
