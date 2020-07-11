@@ -1,6 +1,9 @@
-@import url('https://fonts.googleapis.com/css?family=Lato:400,700,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&family=Varela&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@700,800,900&display=swap');
+@font-face {
+  font-family: 'Bifocals';
+  src: url('/public/fonts/bifocals/Bifocals-Regular.eot');
+  src: url('/public/fonts/bifocals/Bifocals-Regular.woff') format('woff'),
+    url('/public/fonts/bifocals/Bifocals-Regular.otf') format('opentype'), url('/public/fonts/bifocals/Bifocals-Regular.svg') format('svg');
+}
 
 * {
   box-sizing: border-box;
@@ -17,37 +20,27 @@ body,
 }
 
 body {
-  font-family: -apple-system, system-ui, sans-serif;
+  font-family: 'Bifocals' -apple-system, system-ui, sans-serif;
   font-size: 1.125em;
   font-weight: 400;
   line-height: 150%;
   color: rgba(0, 0, 0, 0.75);
+  /* background-color: #11020c; */
+  background-color: #000000;
 }
 
 .jumbo {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate3d(-50%, -40%, 0);
   display: flex;
-  flex-direction: column;
-  align-items: left;
-  min-width: 380px;
+  margin-top: 10%;
+  margin-left: 7.5%;
 }
 
 .jumbo h1 {
+  font-family: 'Bifocals', sans-serif;
   font-size: 75px;
   line-height: 66px;
-  width: 0;
-}
-
-@media (max-width: 580px) {
-  .jumbo h1 {
-    font-size: 46px;
-    line-height: 46px;
-    letter-spacing: 26px;
-    margin-left: 26px;
-  }
+  font-weight: 400;
+  color: #e1e1e1;
 }
 
 .section-box {
